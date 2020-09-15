@@ -1,5 +1,5 @@
 //
-//  Film_FestTests.swift
+//  MovieStructTests.swift
 //  Film FestTests
 //
 //  Created by Sunimal Herath on 15/9/20.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import Film_Fest
 
-class Film_FestTests: XCTestCase {
+class MovieStructTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -19,16 +19,18 @@ class Film_FestTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testInit_MovieWithTitle() {
+        let testMovie = Movie(title: "The Matrix")
+        
+        XCTAssertNotNil(testMovie)
+        XCTAssertEqual(testMovie.title, "The Matrix")
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testInit_SetMovieTitleAndReleaseDate() {
+        let testMovie = Movie(title: "Bourne Identity", releaseDate: "2001")
+        
+        XCTAssertNotNil(testMovie)
+        XCTAssertEqual(testMovie.releaseDate, "2001")
     }
 
 }
