@@ -28,5 +28,6 @@ class MovieManager {
         moviesToSeeCount -= 1
         moviesSeenCount += 1
         
+        moviesToWatchArray.remove(at: index)
     }
 }

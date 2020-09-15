@@ -13,6 +13,9 @@ class MovieManagerTests: XCTestCase {
     
     var sut: MovieManager!
     
+    let scifiMovie = Movie(title: "The Matrix")
+    let actionMovie = Movie(title: "Batman Begins")
+    let animatedMovie = Movie(title: "LEGO Batman")
 
     override func setUpWithError() throws {
         sut = MovieManager()
@@ -35,14 +38,13 @@ class MovieManagerTests: XCTestCase {
     // MARK: add & query
     
     func testAdd_MoviesToSee_ReturnsOne() {
-        let testMovie = Movie(title: "Batman Begins")
-        sut.addMovie(movie: testMovie)
+        sut.addMovie(movie: actionMovie)
         
         XCTAssertEqual(sut.moviesToSeeCount, 1)
     }
     
     func testQuery_ReturnsMovieAtIndex() {
-        let testMovie = Movie(title: "Terminator 2")
+        let testMovie = scifiMovie
         sut.addMovie(movie: testMovie)
         
         let movieQueried = sut.movieAtIndex(index: 0)
@@ -52,10 +54,21 @@ class MovieManagerTests: XCTestCase {
     // MARK: checking off
     
     func testCheckOffMovie_UpdatesMovieMangerCounts() {
-        sut.addMovie(movie: Movie(title: "LEGO Batman"))
+        sut.addMovie(movie: animatedMovie)
         sut.checkOffMovieAtIndex(index: 0)
         
         XCTAssertEqual(sut.moviesToSeeCount, 0)
         XCTAssertEqual(sut.moviesSeenCount, 1)
     }
+    
+    func testCheckOffMovie_RemoveMovieFromArray() {
+        sut.addMovie(movie: scifiMovie)
+        sut.addMovie(movie: actionMovie)
+        sut.addMovie(movie: animatedMovie)
+        
+        sut.checkOffMovieAtIndex(index: 0)
+        XCTAssertEqual(sut.movieAtIndex(index: 0).title, actionMovie.title) // since the top movie removed, second movie should be the one at given index
+    }
+    
+    
 }
